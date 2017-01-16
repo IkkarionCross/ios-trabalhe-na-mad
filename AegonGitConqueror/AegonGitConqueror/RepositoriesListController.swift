@@ -14,9 +14,18 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
     private var projects   : [GitProject]!
     private var currentPage: Int = 1
     private var updatingRepositories: Bool = false
+    
+    private var appDelegate: AppDelegate!
+    private var dataContext: NSManagedObjectContext!
+    private var repoDao    : RepositoriesDAO!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.dataContext = self.appDelegate.dataController.managedObjectContext
+        
+        self.repoDao = RepositoriesDAO(withContext: self.dataContext)
 
         let nib = UINib(nibName: "RepositoryCell", bundle: Bundle.main)
         self.tableView.register(nib, forCellReuseIdentifier: "repoCell")
@@ -25,10 +34,6 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
         syncProjects()
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -63,28 +68,22 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
     func syncProjects()
     {
         updatingRepositories = true
-        if (!PersistenceManager.shared.isSyncronized(page: currentPage))
+        
+        if (!self.repoDao.isSyncronized(page: currentPage))
         {
             GitHubApi.shared.getRepositories(withPage: currentPage, apiDelegate: self)
         }
         else
         {
-            loadRepositoriesFromCache(forPage: currentPage)
+            loadRepositories(forPage: currentPage)
         }
     }
     
-    func loadRepositoriesFromCache(forPage:Int)
+    func loadRepositories(forPage:Int)
     {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let predicate = NSPredicate(format: "page = %@", String(forPage))
-        let sortDescriptor = NSSortDescriptor(key: "stars", ascending: false)
-        let fetchProjects:NSFetchRequest<GitProject> = GitProject.fetchRequest()
-        fetchProjects.predicate = predicate
-        fetchProjects.sortDescriptors = [sortDescriptor]
-        
         do
         {
-            let fetchedProjects = try appDelegate.dataController.managedObjectContext.fetch(fetchProjects) as [GitProject]
+            let fetchedProjects = try self.repoDao.getAllRepositories(forPage: forPage) as [GitProject]
             
             self.projects.append(contentsOf: fetchedProjects)
             
@@ -97,12 +96,11 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
         }
     }
     
-    
     func receiveRepositories(forPage:Int, repositories: RepositoriesData) {
         
-        PersistenceManager.shared.syncWithCoreData(repositories: repositories, forPage: forPage)
+        self.repoDao.insertAll(repositories: repositories, forPage: forPage)
         
-        loadRepositoriesFromCache(forPage: forPage)
+        loadRepositories(forPage: forPage)
     }
     
     func apiRequestError(error: Error) {
@@ -116,8 +114,6 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
         updatingRepositories = false
     }
     
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "repoCell", for: indexPath)
         
@@ -125,7 +121,6 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
         {
             repoCell.fillWith(project: self.projects[indexPath.row])
         }
-        
 
         return cell
     }
@@ -134,7 +129,6 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
         let project = self.projects[indexPath.row]
         
         self.performSegue(withIdentifier: "showPullRequests", sender: project)
-        
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -149,7 +143,7 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
             !updatingRepositories)
         {
             currentPage += 1
-            print(currentPage)
+            
             syncProjects()
         }
     }

@@ -14,10 +14,19 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
     var repository:GitProject?
     
     private var pullsRequests:[PullsRequest]!
-
+    
+    private var appDelegate: AppDelegate!
+    private var dataContext: NSManagedObjectContext!
+    private var pullsDao   : PullsRequestDAO!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationItem.title = "PullsRequests"
+        
+        self.appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.dataContext = self.appDelegate.dataController.managedObjectContext
+        
+        self.pullsDao = PullsRequestDAO(withContext: dataContext)
         
         let nib = UINib(nibName: "PullsRequestCell", bundle: Bundle.main)
         self.tableView.register(nib, forCellReuseIdentifier: "pullCell")
@@ -35,27 +44,16 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-        
-        
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func loadPullsRequestFromCache()
+    func loadPullsRequests()
     {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let predicate:NSPredicate = NSPredicate(format: "project.id = %d", (self.repository?.id)!)
-        let fetchProjects:NSFetchRequest<PullsRequest> = PullsRequest.fetchRequest()
-        fetchProjects.predicate = predicate
         do
         {
-            self.pullsRequests = try appDelegate.dataController.managedObjectContext.fetch(fetchProjects) as [PullsRequest]
+            self.pullsRequests = try self.pullsDao.getAllPulls(forProjectID: (self.repository?.id)!)
             
             self.tableView.reloadData()
         }
@@ -65,9 +63,9 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
     }
     
     func receivePullsRequest(pulls: [GitPullRequest]) {
-        PersistenceManager.shared.syncWithCoreData(pulls: pulls, forProject: self.repository!)
+        self.pullsDao.insertAll(pulls: pulls, forProject: self.repository!)
         
-        self.loadPullsRequestFromCache()
+        self.loadPullsRequests()
     }
     
     func apiRequestError(error: Error) {
