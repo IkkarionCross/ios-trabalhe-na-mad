@@ -56,7 +56,7 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationController = segue.destination as? PullsRequestListController
         {
-            destinationController.repositoryFullName = sender as? String
+            destinationController.repository = sender as? GitProject
         }
     }
     
@@ -133,7 +133,7 @@ class RepositoriesListController: UITableViewController, GitApiRepositoriesDeleg
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let project = self.projects[indexPath.row]
         
-        self.performSegue(withIdentifier: "showPullRequests", sender: project.full_name)
+        self.performSegue(withIdentifier: "showPullRequests", sender: project)
         
     }
     

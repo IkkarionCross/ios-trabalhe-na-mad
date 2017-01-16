@@ -48,7 +48,7 @@ class PersistenceManager: NSObject {
         appDelegate.saveContext()
     }
     
-    func syncWithCoreData(pulls: [GitPullRequest])
+    func syncWithCoreData(pulls: [GitPullRequest], forProject: GitProject)
     {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.dataController.managedObjectContext
@@ -70,7 +70,8 @@ class PersistenceManager: NSObject {
             pullRequest.setValue(pull.body    , forKey: "body")
   
             
-            pullRequest.setValue(owner, forKey: "oneowner")
+            pullRequest.setValue(owner     , forKey: "user")
+            pullRequest.setValue(forProject, forKey: "project")
         }
         
         appDelegate.saveContext()

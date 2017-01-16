@@ -35,11 +35,13 @@ class PullsRequestCell: UITableViewCell {
         
         let mDate:Date = formatter.date(from: pull.created_date!)!
         
-        self.lblOwnerName?.text = pull.oneowner?.login
+        self.lblOwnerName?.text = pull.user?.login
         self.lblTitle?.text     = pull.title
         self.lblDate?.text      = formatter.string(from: mDate)
         self.tvBody?.text       = pull.body
         
+        
+        self.ivOwnerPicture?.downloadedFrom(link: (pull.user?.picture_url)!)
     }
 
     

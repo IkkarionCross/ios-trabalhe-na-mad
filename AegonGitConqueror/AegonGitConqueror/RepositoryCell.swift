@@ -11,11 +11,13 @@ import UIKit
 class RepositoryCell: UITableViewCell {
     
     
-    @IBOutlet var txtName       :UILabel?
-    @IBOutlet var txtDescription:UILabel?
-    @IBOutlet var txtLang       :UILabel?
-    @IBOutlet var txtStars      :UILabel?
-    @IBOutlet var txtForks      :UILabel?
+    @IBOutlet var lblName       :UILabel?
+    @IBOutlet var lblDescription:UILabel?
+    @IBOutlet var lblLang       :UILabel?
+    @IBOutlet var lblStars      :UILabel?
+    @IBOutlet var lblForks      :UILabel?
+    @IBOutlet var lblOwnerName  :UILabel?
+    @IBOutlet var ivOwnerPicture:UIImageView?
     
     
     var project:GitProject!
@@ -37,11 +39,15 @@ class RepositoryCell: UITableViewCell {
     {
         self.project = project
         
-        self.txtName?.text        = project.full_name
-        self.txtDescription?.text = project.desc
-        self.txtLang?.text        = "Swift"
-        self.txtStars?.text       = String(project.stars)
-        self.txtForks?.text       = String(project.forks)
+        self.lblOwnerName?.text   = project.ownerone?.login
+        self.lblName?.text        = project.full_name
+        self.lblDescription?.text = project.desc
+        self.lblLang?.text        = "Swift"
+        self.lblStars?.text       = String(project.stars)
+        self.lblForks?.text       = String(project.forks)
+        
+        
+        self.ivOwnerPicture?.downloadedFrom(link: (project.ownerone?.picture_url)!)
     }
     
 }

@@ -11,7 +11,7 @@ import CoreData
 
 class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
     
-    var repositoryFullName:String?
+    var repository:GitProject?
     
     private var pullsRequests:[PullsRequest]!
 
@@ -21,13 +21,24 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
         
         let nib = UINib(nibName: "PullsRequestCell", bundle: Bundle.main)
         self.tableView.register(nib, forCellReuseIdentifier: "pullCell")
+        
+        if let project = self.repository
+        {
+            if ((project.pulls?.count)! > 0) // check if it is already in the repository
+            {
+                self.pullsRequests = project.pulls?.allObjects as? [PullsRequest]
+            }
+            else
+            {
+                GitHubApi.shared.getPullsRequests(withRepoFullName: project.full_name!, apiDelegate: self)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            if let fullName = self.repositoryFullName
-            {
-                GitHubApi.shared.getPullsRequests(withRepoFullName: fullName, apiDelegate: self)
-            }
+        
+        
+        
         
     }
 
@@ -39,9 +50,7 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
     func loadPullsRequestFromCache()
     {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
         let fetchProjects:NSFetchRequest<PullsRequest> = PullsRequest.fetchRequest()
-        
         
         do
         {
@@ -55,7 +64,7 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
     }
     
     func receivePullsRequest(pulls: [GitPullRequest]) {
-        PersistenceManager.shared.syncWithCoreData(pulls: pulls)
+        PersistenceManager.shared.syncWithCoreData(pulls: pulls, forProject: self.repository!)
         
         self.loadPullsRequestFromCache()
     }

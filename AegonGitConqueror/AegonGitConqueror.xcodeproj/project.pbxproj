@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		572001311E2C5E5900C057B6 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572001301E2C5E5900C057B6 /* ImageViewExtension.swift */; };
 		57B1D8841E2AD80E003FA4AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1D8831E2AD80E003FA4AA /* AppDelegate.swift */; };
 		57B1D8861E2AD80E003FA4AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1D8851E2AD80E003FA4AA /* ViewController.swift */; };
 		57B1D8891E2AD80E003FA4AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57B1D8871E2AD80E003FA4AA /* Main.storyboard */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		572001301E2C5E5900C057B6 /* ImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		57B1D8801E2AD80E003FA4AA /* AegonGitConqueror.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AegonGitConqueror.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B1D8831E2AD80E003FA4AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57B1D8851E2AD80E003FA4AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5720012F1E2C5E3A00C057B6 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				572001301E2C5E5900C057B6 /* ImageViewExtension.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
 		57B1D8771E2AD80E003FA4AA = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +167,7 @@
 		57B1D8821E2AD80E003FA4AA /* AegonGitConqueror */ = {
 			isa = PBXGroup;
 			children = (
+				5720012F1E2C5E3A00C057B6 /* extensions */,
 				57B7268D1E2BEF640080174C /* custom_ui */,
 				57B1D8E11E2B9C5F003FA4AA /* managers */,
 				57B1D8D61E2B92BF003FA4AA /* service */,
@@ -461,6 +472,7 @@
 				57B1D8861E2AD80E003FA4AA /* ViewController.swift in Sources */,
 				57B1D8841E2AD80E003FA4AA /* AppDelegate.swift in Sources */,
 				57B1D8D81E2B92DA003FA4AA /* GitHubApi.swift in Sources */,
+				572001311E2C5E5900C057B6 /* ImageViewExtension.swift in Sources */,
 				57B1D8CF1E2B17D7003FA4AA /* GitProjectData.swift in Sources */,
 				57B1D8DA1E2B950A003FA4AA /* GitApiRepositoriesDelegate.swift in Sources */,
 				57B1D8D21E2B1841003FA4AA /* ProjectOwner+CoreDataClass.swift in Sources */,
