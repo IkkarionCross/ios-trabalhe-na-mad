@@ -22,6 +22,7 @@
     <entity name="PullsRequest" representedClassName="PullsRequest" syncable="YES" codeGenerationType="class">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="html_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GitProject" inverseName="pulls" inverseEntity="GitProject" syncable="YES"/>
@@ -30,6 +31,6 @@
     <elements>
         <element name="GitProject" positionX="396" positionY="-7830" width="128" height="195"/>
         <element name="ProjectOwner" positionX="153" positionY="-7749" width="117" height="120"/>
-        <element name="PullsRequest" positionX="225" positionY="-8037" width="128" height="135"/>
+        <element name="PullsRequest" positionX="225" positionY="-8037" width="128" height="150"/>
     </elements>
 </model>

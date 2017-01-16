@@ -50,8 +50,9 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
     func loadPullsRequestFromCache()
     {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let predicate:NSPredicate = NSPredicate(format: "project.id = %d", (self.repository?.id)!)
         let fetchProjects:NSFetchRequest<PullsRequest> = PullsRequest.fetchRequest()
-        
+        fetchProjects.predicate = predicate
         do
         {
             self.pullsRequests = try appDelegate.dataController.managedObjectContext.fetch(fetchProjects) as [PullsRequest]
@@ -104,8 +105,14 @@ class PullsRequestListController: UITableViewController, GitApiPullsDelegate {
             pullCell.fillWith(pull: self.pullsRequests[indexPath.row])
             
         }
-
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let pullRequest:PullsRequest = pullsRequests[indexPath.row]
+        let url:URL = URL(string: pullRequest.html_url!)!
+        
+        UIApplication.shared.openURL(url)
     }
     
     

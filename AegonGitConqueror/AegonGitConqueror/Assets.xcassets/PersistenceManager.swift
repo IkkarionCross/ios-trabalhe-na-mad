@@ -23,21 +23,21 @@ class PersistenceManager: NSObject {
             let ownerEntity = NSEntityDescription.entity(forEntityName: "ProjectOwner", in: context)
             let owner  = NSManagedObject(entity: ownerEntity!, insertInto: context)
             
-            owner.setValue(repo.owner?.id, forKey: "id")
-            owner.setValue(repo.owner?.login, forKey: "login")
+            owner.setValue(repo.owner?.id         , forKey: "id"         )
+            owner.setValue(repo.owner?.login      , forKey: "login"      )
             owner.setValue(repo.owner?.picture_url, forKey: "picture_url")
             
             let projectEntity  = NSEntityDescription.entity(forEntityName: "GitProject", in: context)
             let project = NSManagedObject(entity: projectEntity!, insertInto: context)
             
-            project.setValue(repo.id      , forKey: "id")
-            project.setValue(repo.desc    , forKey: "desc")
+            project.setValue(repo.id      , forKey: "id"       )
+            project.setValue(repo.desc    , forKey: "desc"     )
             project.setValue(repo.fullName, forKey: "full_name")
-            project.setValue(repo.name    , forKey: "name")
-            project.setValue(repo.forks   , forKey: "forks")
-            project.setValue(repo.stars   , forKey: "stars")
-            project.setValue(repo.watchers, forKey: "watchers")
-            project.setValue(forPage      , forKey: "page")
+            project.setValue(repo.name    , forKey: "name"     )
+            project.setValue(repo.forks   , forKey: "forks"    )
+            project.setValue(repo.stars   , forKey: "stars"    )
+            project.setValue(repo.watchers, forKey: "watchers" )
+            project.setValue(forPage      , forKey: "page"     )
             
             project.setValue(owner, forKey: "ownerone")
             
@@ -57,17 +57,18 @@ class PersistenceManager: NSObject {
             let ownerEntity = NSEntityDescription.entity(forEntityName: "ProjectOwner", in: context)
             let owner  = NSManagedObject(entity: ownerEntity!, insertInto: context)
             
-            owner.setValue(pull.user?.id, forKey: "id")
-            owner.setValue(pull.user?.login, forKey: "login")
+            owner.setValue(pull.user?.id         , forKey: "id"         )
+            owner.setValue(pull.user?.login      , forKey: "login"      )
             owner.setValue(pull.user?.picture_url, forKey: "picture_url")
             
             let prEntity     = NSEntityDescription.entity(forEntityName: "PullsRequest", in: context)
             let pullRequest  = NSManagedObject(entity: prEntity!, insertInto: context)
             
-            pullRequest.setValue(pull.id      , forKey: "id")
+            pullRequest.setValue(pull.id      , forKey: "id"          )
             pullRequest.setValue(pull.date    , forKey: "created_date")
-            pullRequest.setValue(pull.title   , forKey: "title")
-            pullRequest.setValue(pull.body    , forKey: "body")
+            pullRequest.setValue(pull.title   , forKey: "title"       )
+            pullRequest.setValue(pull.body    , forKey: "body"        )
+            pullRequest.setValue(pull.htmlUrl , forKey: "html_url"    )
   
             
             pullRequest.setValue(owner     , forKey: "user")
