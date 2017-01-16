@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mk0-eW-XlW">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Repositories-->
+        <scene sceneID="C3p-3g-Rfu">
+            <objects>
+                <tableViewController id="157-7O-UZy" customClass="RepositoriesListController" customModule="AegonGitConqueror" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="105" sectionHeaderHeight="28" sectionFooterHeight="28" id="K9S-VO-ap8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="157-7O-UZy" id="G7y-6F-o6P"/>
+                            <outlet property="delegate" destination="157-7O-UZy" id="T6d-qd-EMm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Repositories" id="XuY-9T-jUk"/>
+                    <connections>
+                        <segue destination="srT-f6-OIv" kind="show" identifier="showPullRequests" id="MSH-LG-aL3"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xhR-5B-Eox" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-38" y="6"/>
+        </scene>
+        <!--PullRequests-->
+        <scene sceneID="8w1-5e-l8f">
+            <objects>
+                <tableViewController id="srT-f6-OIv" customClass="PullsRequestListController" customModule="AegonGitConqueror" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="446" sectionHeaderHeight="28" sectionFooterHeight="28" id="IND-Mj-jFL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="srT-f6-OIv" id="FJm-Uh-piW"/>
+                            <outlet property="delegate" destination="srT-f6-OIv" id="gQI-H1-jbM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="PullRequests" id="5HW-4d-SyU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IBk-FR-HyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-294" y="808"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="33O-gn-4XQ">
+            <objects>
+                <navigationController id="mk0-eW-XlW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QV0-S8-6LY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="157-7O-UZy" kind="relationship" relationship="rootViewController" id="7is-vj-KnT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5dO-bD-HzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-818" y="6"/>
+        </scene>
+    </scenes>
+</document>
