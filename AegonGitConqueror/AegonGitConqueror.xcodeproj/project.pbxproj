@@ -33,6 +33,7 @@
 		57B726A11E2C26C60080174C /* PullsRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B7269F1E2C26C60080174C /* PullsRequestCell.xib */; };
 		57BFD54B1E2D74690076F073 /* PullsRequestDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BFD54A1E2D74690076F073 /* PullsRequestDAO.swift */; };
 		57BFD54D1E2D787D0076F073 /* RepositoriesDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BFD54C1E2D787D0076F073 /* RepositoriesDAO.swift */; };
+		57BFD54F1E2D7BB70076F073 /* RepositoriesControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BFD54E1E2D7BB70076F073 /* RepositoriesControllerTests.swift */; };
 		87F014C48CE374B812833C9A /* Pods_AegonGitConqueror.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6DB764352F934395E220CF2 /* Pods_AegonGitConqueror.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		57B7269F1E2C26C60080174C /* PullsRequestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PullsRequestCell.xib; sourceTree = "<group>"; };
 		57BFD54A1E2D74690076F073 /* PullsRequestDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullsRequestDAO.swift; sourceTree = "<group>"; };
 		57BFD54C1E2D787D0076F073 /* RepositoriesDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesDAO.swift; sourceTree = "<group>"; };
+		57BFD54E1E2D7BB70076F073 /* RepositoriesControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesControllerTests.swift; sourceTree = "<group>"; };
 		7D9F72C13488AF7240917DA9 /* Pods-AegonGitConqueror.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AegonGitConqueror.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AegonGitConqueror/Pods-AegonGitConqueror.debug.xcconfig"; sourceTree = "<group>"; };
 		B6DB764352F934395E220CF2 /* Pods_AegonGitConqueror.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AegonGitConqueror.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99AF647475719EA9737AFB7 /* Pods-AegonGitConqueror.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AegonGitConqueror.release.xcconfig"; path = "Pods/Target Support Files/Pods-AegonGitConqueror/Pods-AegonGitConqueror.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				57B1D89B1E2AD80E003FA4AA /* AegonGitConquerorTests.swift */,
 				57B1D89D1E2AD80E003FA4AA /* Info.plist */,
+				57BFD54E1E2D7BB70076F073 /* RepositoriesControllerTests.swift */,
 			);
 			path = AegonGitConquerorTests;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57B1D89C1E2AD80E003FA4AA /* AegonGitConquerorTests.swift in Sources */,
+				57BFD54F1E2D7BB70076F073 /* RepositoriesControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
